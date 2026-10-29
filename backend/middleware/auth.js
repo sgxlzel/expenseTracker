@@ -2,7 +2,11 @@ import {User} from "../models/userModel.js";
 // import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key"; // Replace with your own secret key
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET is not configured");
+}
 
 export default async function authMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
@@ -26,6 +30,7 @@ export default async function authMiddleware(req, res, next) {
             });
         }
         req.user = user;
+        req.userId = user._id;
         next();
     } 
     catch (error) {
@@ -36,4 +41,4 @@ export default async function authMiddleware(req, res, next) {
         });
     }
 
-} 
+}

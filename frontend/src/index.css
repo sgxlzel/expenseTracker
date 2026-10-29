@@ -1,1 +1,54 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+}
+
+html.dark {
+  background-color: #0b0d1b;
+  color: #f1f5f9;
+}
+
+/* Custom scrollbar for warm midnight blue-purple dark mode */
+html.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0b0d1b;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #252752;
+  border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #393c78;
+}
+
+/* Dark mode date picker icon */
+html.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.85);
+  cursor: pointer;
+}
+
+/* Dark mode Recharts adjustments for high contrast */
+.dark .recharts-cartesian-grid line {
+  stroke: #252752 !important;
+}
+
+.dark .recharts-text {
+  fill: #cbd5e1 !important;
+}
+
+.dark .recharts-legend-item-text {
+  color: #e2e8f0 !important;
+}
